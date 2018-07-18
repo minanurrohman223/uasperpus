@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/geturi.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var id = decodeURI(getUrlVars()["id"]);
+        var kode_pegawai = decodeURI(getUrlVars()["kode_pegawai"]);
+        var nama_pegawai = decodeURI(getUrlVars()["nama_pegawai"]);
+        var jabatan = decodeURI(getUrlVars()["jabatan"]);
+        $("#id").val(id);
+        $("#kode_pegawai").val(kode_pegawai);
+        $("#nama_pegawai").val(nama_pegawai);
+        $("#jabatan").val(jabatan);
+        $("#update").click(function() {
+            var id = $("#id").val();
+            var kode_pegawai = $("#kode_pegawai").val();
+            var nama_pegawai = $("#nama_pegawai").val();
+            var dataString = "id=" + id + "&kode_pegawai=" + kode_pegawai + "&nama_pegawai=" + nama_pegawai + "&jabatan=" + jabatan + "&update=";
+            $.ajax({
+                type: "POST",
+                url: "https://uasweb123.000webhostapp.com/update-pegawai.php",
+                data: dataString,
+                crossDomain: true,
+                cache: false,
+                beforeSend: function() {
+                    $("#update").val('Connecting...');
+                },
+                success: function(data) {
+                    if (data == "success") {
+                        alert("Updated");
+                        $("#update").val("Update");
+                    } else if (data == "error") {
+                        alert("error");
+                    }
+                }
+            });
+
+        });
+        $("#delete").click(function() {
+            var id = $("#id").val();
+            var dataString = "id=" + id + "&delete=";
+            $.ajax({
+                type: "GET",
+                url: "https://uasweb123.000webhostapp.com/delete-pegawai.php",
+                data: dataString,
+                crossDomain: true,
+                cache: false,
+                beforeSend: function() {
+                    $("#delete").val('Connecting...');
+                },
+                success: function(data) {
+                    if (data == "success") {
+                        alert("Deleted");
+                        $("#delete").val("Delete");
+                    } else if (data == "error") {
+                        alert("error");
+                    }
+                }
+            });
+
+        });
+    });
+    </script>
+</head>
+
+<body>
+   <!-- <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Update Data pegawai</h1>
+        <a class="button button-clear" href="readjson.html">Read JSON</a>
+    </div> -->
+    <div class="list">
+        <div class="login-page">
+  <div class="form">
+    
+    <form class="login-form">
+        <input type="hidden" id="id" value="" />
+      <input type="text" id="kode_pegawai" value="" />
+      <input type="text" id="nama_pegawai" value="" />
+      <input type="text" id="jabatan" value="" />
+      <div class="item">
+            <input type="button" id="update" class="button button-block" value="Update" />
+            <input type="button" id="delete" class="button button-block" value="Delete" />
+        </div>
+    </form>
+    <p class="message">Lihat Data pegawai <a href="readjson-pegawai.html">Go . . . !</a></p>
+  </div>
+</div>
+    </div>
+</body>
+
+</html>

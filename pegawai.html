@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#insert").click(function() {
+            var kode_pegawai = $("#kode_pegawai").val();
+            var nama_pegawai = $("#nama_pegawai").val();
+            var jabatan = $("#jabatan").val();
+            var dataString = "&kode_pegawai=" + kode_pegawai + "&nama_pegawai=" + nama_pegawai + "&jabatan=" + jabatan + "&insert=";
+            if ($.trim(kode_pegawai).length > 0 & $.trim(nama_pegawai).length > 0 & $.trim(jabatan).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "https://uasweb123.000webhostapp.com/insert-pegawai.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('Insert');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+</head>
+
+<body>
+
+    <!--<div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <h1 class="title">Input pegawai</h1>
+        <a class="button button-clear" href="readjson.html">Lihat Data pegawai</a>
+    </div>-->
+    <div class="list">
+        <div class="login-page">
+  <div class="form">
+    
+    <form class="login-form">
+        <input type="hidden" id="id" value="" />
+      <input type="text" id="kode_pegawai" value="" placeholder="Kode pegawai"/>
+      <input type="text" id="nama_pegawai" value="" placeholder="Nama pegawai"/>
+      <input type="text" id="jabatan" value="" placeholder="jabatan"/>
+      <button id="insert" value="Insert">Insert</button>
+    </form>
+    <p class="message">Lihat Data pegawai <a href="readjson-pegawai.html">Go . . . !</a></p>
+  </div>
+</div>
+    </div>
+    
+</body>
+
+</html>

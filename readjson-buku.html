@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "https://uasweb123.000webhostapp.com/json-buku.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                var kode_buku = field.kode_buku;
+                var nama_buku = field.nama_buku;
+                 $("#listview").append("<a class='item' href='form-buku.html?id=" + id + "&kode_buku=" + kode_buku + "&nama_buku=" + nama_buku + "'>" + "<h2>" + kode_buku + " </h2><p>" + nama_buku + "</p></a>");
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <!--<div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Data buku</h1>
+    </div>-->
+    <br/>
+    <br/>
+    
+    <ul class="list" id="listview">
+    </ul>
+    <div class="list">
+        <div class="login-page">
+  <div class="form">
+    
+    <form class="login-form">
+      <button formaction="/index.html">Home</button>
+  </form>
+  </div>
+  </div>
+  </div>
+    <br/>
+    <br/>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "https://uasweb123.000webhostapp.com/json-pegawai.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                var kode_pegawai = field.kode_pegawai;
+                var nama_pegawai = field.nama_pegawai;
+                var jabatan = field.jabatan;
+                 $("#listview").append("<a class='item' href='form-pegawai.html?id=" + id + "&kode_pegawai=" + kode_pegawai + "&nama_pegawai=" + nama_pegawai  + "&jabatan=" + jabatan + "'><span class='item-note'>jabatan : " + jabatan + "</span><h2>" + kode_pegawai + " </h2><p>" + nama_pegawai + "</p></a>");
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <!--<div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Data pegawai</h1>
+    </div>-->
+    <br/>
+    <br/>
+    
+    <ul class="list" id="listview">
+    </ul>
+    <div class="list">
+        <div class="login-page">
+  <div class="form">
+    
+    <form class="login-form">
+      <button formaction="/index.html">Home</button>
+  </form>
+  </div>
+  </div>
+  </div>
+    <br/>
+    <br/>
+</body>
+
+</html>
